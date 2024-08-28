@@ -1,5 +1,7 @@
 package com.example.basicab
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,6 +13,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    private val allResults = arrayListOf<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val edittextB = findViewById<EditText>(R.id.edittext_b)
         val buttonadd = findViewById<Button>(R.id.button_add)
         val textviewC = findViewById<TextView>(R.id.textview_c)
+        val buttonnxt = findViewById<Button>(R.id.resultactbutton)
 
 
         buttonadd.setOnClickListener(View.OnClickListener {
@@ -37,5 +43,13 @@ class MainActivity : AppCompatActivity() {
                 textviewC.text = "Added Result $c"
             }
         )
+
+
+        buttonnxt.setOnClickListener(View.OnClickListener {
+
+            val intent = Intent(this,ResultActivity::class.java)
+            intent.putIntegerArrayListExtra("allResults",allResults)
+            startActivity(intent)
+        })
     }
 }
